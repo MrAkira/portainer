@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  adminer:
+    image: adminer:latest
+    container_name: adminer
+    hostname: adminer
+    restart: always
+    ports:
+      - 8080:8080
