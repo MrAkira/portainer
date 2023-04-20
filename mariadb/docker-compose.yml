@@ -9,8 +9,8 @@ services:
     environment:
       MARIADB_ROOT_PASSWORD: $MARIADB_ROOT_PASSWORD
     networks:
-      - br0
+      - secure
       
 networks:
-  br0:
+  secure:
     external: true
