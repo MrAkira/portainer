@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    hostname: vaultwarden
+    restart: always
+    environment:
+      WEBSOCKET_ENABLED: "true"  # Enable WebSocket notifications.
+    volumes:
+      - /opt/vaultwarden:/data
+    networks:
+      - secure
+      
+networks:
+  secure:
+    external: true
