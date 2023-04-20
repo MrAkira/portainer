@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  rss-bridge:
+    image: rssbridge/rss-bridge:latest
+    container_name: rssbridge
+    hostname: rssbridge
+    volumes:
+      - /opt/rssbridge/config:/config
+    restart: unless-stopped
+    networks:
+      - secure
+      
+networks:
+  secure:
+    external: true
