@@ -8,8 +8,6 @@ services:
     restart: always
     ports:
       - 8088:80
-    links:
-      - mariadb
     volumes:
       - /mnt/user/appdata/nextcloud:/var/www/html
     environment:
