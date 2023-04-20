@@ -2,7 +2,7 @@ version: "3"
 
 services:
   caddy:
-    image: caddy:latest
+    image: caddy-cloudflare:latest
     hostname: caddy
     container_name: caddy
     restart: unless-stopped
