@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  caddy:
+    image: caddy:latest
+    hostname: caddy
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - /mnt/user/appdata/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - /mnt/user/appdata/caddy/site:/srv
+      - /mnt/user/appdata/caddy/data:/data
+      - /mnt/user/appdata/caddy/config:/config
+    networks:
+      - secure
+
+networks:
+  secure:
+    external: true
