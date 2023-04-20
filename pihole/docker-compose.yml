@@ -13,8 +13,8 @@ services:
       #- "67:67/udp" # Only required if you are using Pi-hole as your DHCP server
       - "8089:80/tcp"
     environment:
-      - TZ: 'Europe/Berlin'
-      - WEBPASSWORD: '$WEBPASSWORD'
+      - TZ=Europe/Berlin
+      - WEBPASSWORD=$WEBPASSWORD
     # Volumes store your data between container upgrades
     volumes:
       - '/mnt/user/appdata/pihole/data:/etc/pihole'
