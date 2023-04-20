@@ -8,3 +8,9 @@ services:
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: $MARIADB_ROOT_PASSWORD
+    networks:
+      - br0
+      
+networks:
+  br0:
+    external: true
