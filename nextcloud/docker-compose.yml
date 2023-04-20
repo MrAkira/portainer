@@ -15,6 +15,9 @@ services:
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
       - MYSQL_HOST=mariadb
+      - PUID=99
+      - PGID=100
+      - UMASK=022
     networks:
       - secure
       
