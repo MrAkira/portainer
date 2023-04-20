@@ -9,8 +9,8 @@ services:
     ports:
       - 8080:8080
     networks:
-      - br0
+      - secure
       
 networks:
-  br0:
+  secure:
     external: true
