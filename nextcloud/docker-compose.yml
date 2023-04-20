@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  app:
+    image: nextcloud
+    container_name: nextcloud
+    hostname: nextcloud
+    restart: always
+    ports:
+      - 8088:80
+    links:
+      - mariadb
+    volumes:
+      - /mnt/user/appdata/nextcloud:/var/www/html
+    environment:
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_HOST=mariadb
