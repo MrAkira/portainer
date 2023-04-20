@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  tiddlywiki:
+    image: 'elasticdog/tiddlywiki:latest'
+    container_name: tiddlywiki
+    hostname: tiddlywiki
+    restart: unless-stopped
+    #ports:
+    #  - 3166:3166
+    volumes:
+      - /opt/tiddlywiki:/tiddlywiki
+    networks:
+      - secure
+    command: zettelkasten --listen host=0.0.0.0 port=3166 username=marius password="$PW"
+
+networks:
+  secure:
+    external: true
