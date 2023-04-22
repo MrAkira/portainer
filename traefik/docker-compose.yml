@@ -6,6 +6,7 @@ services:
     container_name: traefik
     hostname: traefik
     command:
+      - "--log.level=DEBUG"
       # allows accessing a Traefik dashboard - that simplifies debugging
       # but should be disabled outside of development environments due to security reasons.
       - "--api.insecure=true"
@@ -16,11 +17,11 @@ services:
       # create an entrypoint called web, listening on :80
       - "--entrypoints.web.address=:80"
       # redirect to https
-      - '--entrypoints.web.http.redirections.entryPoint.to=websecure'
-      - '--entrypoints.web.http.redirections.entryPoint.scheme=https'
-      - '--entrypoints.websecure.address=:443'
-      - '--certificatesresolvers.le.acme.dnschallenge=true'
-      - '--certificatesresolvers.le.acme.dnschallenge.provider=cloudflare'
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.le.acme.dnschallenge=true"
+      - "--certificatesresolvers.le.acme.dnschallenge.provider=cloudflare"
     environment:
       - CF_DNS_API_TOKEN=$CF_DNS_API_TOKEN
     ports:
