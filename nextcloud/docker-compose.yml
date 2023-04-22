@@ -6,8 +6,8 @@ services:
     container_name: nextcloud
     hostname: nextcloud
     restart: always
-    ports:
-      - 8088:80
+    #ports:
+    #  - 8088:80
     volumes:
       - /mnt/user/appdata/nextcloud:/var/www/html
     environment:
