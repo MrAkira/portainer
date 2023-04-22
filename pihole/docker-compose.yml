@@ -29,10 +29,10 @@ services:
       - "traefik.http.routers.pihole.entrypoints=websecure"
       - "traefik.http.routers.pihole.tls.certresolver=le"
       - "traefik.http.services.pihole.loadbalancer.server.port=8080"
-      # Create a middleware
-      - "traefik.http.middlewares.pihole-add-prefix.addprefix.prefix=/admin"
       # Apply the middleware to the router
       - "traefik.http.routers.pihole.middlewares=pihole-add-prefix"
+      # Create a middleware
+      - "traefik.http.middlewares.pihole-add-prefix.addprefix.prefix=/admin"
     networks:
       - secure
 
