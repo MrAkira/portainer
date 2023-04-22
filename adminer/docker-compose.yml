@@ -8,6 +8,12 @@ services:
     restart: always
     ports:
       - 8080:8080
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.adminer.rule=Host(`adminer.mindful-student.net`)"
+      - "traefik.http.routers.adminer.entrypoints=websecure"
+      - "traefik.http.routers.adminer.tls.certresolver=le"
+      - "traefik.http.services.adminer.loadbalancer.server.port=8080"
     networks:
       - secure
       
