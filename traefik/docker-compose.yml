@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  traefik:
+    image: traefik:v2.5
+    container_name: traefik
+    hostname: traefik
+    command:
+      # allows accessing a Traefik dashboard - that simplifies debugging
+      # but should be disabled outside of development environments due to security reasons.
+      - "--api.insecure=true"
+      # enables the Docker configuration discovery
+      - "--providers.docker=true"
+      # do not expose Docker services by default
+      - "--providers.docker.exposedbydefault=false"
+      # create an entrypoint called web, listening on :80
+      - "--entrypoints.web.address=:80"
+      # redirect to https
+      # - '--entrypoints.web.http.redirections.entryPoint.to=websecure'
+      # - '--entrypoints.web.http.redirections.entryPoint.scheme=https'
+      - '--entrypoints.websecure.address=:443'
+      - '--certificatesresolvers.le.acme.dnschallenge=true'
+      - '--certificatesresolvers.le.acme.dnschallenge.provider=cloudflare'
+    environment:
+      - CF_DNS_API_TOKEN=$CF_DNS_API_TOKEN
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
