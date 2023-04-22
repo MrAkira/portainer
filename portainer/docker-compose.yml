@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    hostname: portainer
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /mnt/user/appdata/portainer-ce:/data
+    ports:
+      - 9000:9000
+    networks:
+      - secure
+
+networks:
+  secure:
+    external: true
