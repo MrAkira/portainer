@@ -6,7 +6,7 @@ services:
     container_name: traefik
     hostname: traefik
     command:
-      - "--log.level=DEBUG"
+      #- "--log.level=DEBUG"
       - "--providers.file.directory=/opt/docker/traefik"
       - "--providers.file.watch=true"
       # allows accessing a Traefik dashboard - that simplifies debugging
