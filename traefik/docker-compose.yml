@@ -7,6 +7,8 @@ services:
     hostname: traefik
     command:
       - "--log.level=DEBUG"
+      - "--providers.file.directory=/opt/docker/traefik"
+      - "--providers.file.watch=true"
       # allows accessing a Traefik dashboard - that simplifies debugging
       # but should be disabled outside of development environments due to security reasons.
       - "--api.insecure=true"
@@ -30,6 +32,7 @@ services:
       - "8086:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /mnt/user/appdata/traefik:/opt/docker/traefik
     networks:
       - secure
 
