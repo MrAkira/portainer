@@ -24,6 +24,7 @@ services:
       - "--entrypoints.websecure.address=:443"
       - "--certificatesresolvers.le.acme.dnschallenge=true"
       - "--certificatesresolvers.le.acme.dnschallenge.provider=cloudflare"
+      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
     environment:
       - CF_DNS_API_TOKEN=$CF_DNS_API_TOKEN
     ports:
@@ -32,7 +33,8 @@ services:
       - "8086:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /mnt/user/appdata/traefik:/opt/docker/traefik
+      - /mnt/user/appdata/traefik/config:/opt/docker/traefik
+      - /mnt/user/appdata/traefik/letsencrypt:/letsencrypt
     networks:
       - secure
 
