@@ -28,7 +28,7 @@ services:
       - "traefik.http.routers.pihole.rule=Host(`dns.mindful-student.net`)"
       - "traefik.http.routers.pihole.entrypoints=websecure"
       - "traefik.http.routers.pihole.tls.certresolver=le"
-      - "traefik.http.services.pihole.loadbalancer.server.port=8080"
+      - "traefik.http.services.pihole.loadbalancer.server.port=80"
       # Apply the middleware to the router
       - "traefik.http.routers.pihole.middlewares=pihole-add-prefix"
       # Create a middleware
