@@ -33,6 +33,7 @@ services:
       - "traefik.http.routers.pihole.middlewares=pihole-add-prefix"
       # Create a middleware
       - "traefik.http.middlewares.pihole-add-prefix.addprefix.prefix=/admin"
+    # PiHole muss im br0 Netzwerk sein, da UNRAID Port 53 schon belegt hat
     networks:
       br0:
         ipv4_address: 192.168.42.201
