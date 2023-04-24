@@ -5,5 +5,6 @@ services:
     image: containrrr/watchtower:latest
     container_name: watchtower
     hostname: watchtower
+    restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
