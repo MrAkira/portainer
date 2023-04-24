@@ -34,8 +34,8 @@ services:
       # Create a middleware
       - "traefik.http.middlewares.pihole-add-prefix.addprefix.prefix=/admin"
     networks:
-      - secure
+      - br0
 
 networks:
-  secure:
+  br0:
     external: true
