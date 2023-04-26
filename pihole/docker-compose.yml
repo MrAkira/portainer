@@ -59,7 +59,7 @@ networks:
 #  -e 'TCP_PORT_443'='443'
 #  -e 'PIHOLE_DNS_'='8.8.8.8;8.8.4.4'
 #  -e 'TZ'='Europe/Berlin'
-#  -e 'WEBPASSWORD'='Washhouse-Crisping-Glorify-Sled-Unmoved-Lived-Pasta-Huddling3'
+#  -e 'WEBPASSWORD'=''
 #  -e 'INTERFACE'='br0'
 #  -e 'ServerIP'='192.168.42.201'
 #  -e 'ServerIPv6'=''
