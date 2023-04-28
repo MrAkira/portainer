@@ -6,7 +6,10 @@ services:
     container_name: cloudflared
     hostname: cloudflared
     restart: always
-    command: tunnel run
+    # tunnel run um zu starten
+    command: $COMMAND
+    volumes:
+      - /mnt/user/appdata/cloudflared/:/home/nonroot/.cloudflared/
     environment:
       - TUNNEL_TOKEN=$TUNNEL_TOKEN
     networks:
