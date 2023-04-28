@@ -5,7 +5,7 @@ services:
     image: cloudflare/cloudflared:latest
     container_name: cloudflared
     hostname: cloudflared
-    restart: always
+    restart: "no"
     # tunnel run um zu starten
     command: $COMMAND
     volumes:
