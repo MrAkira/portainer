@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  headscale:
+    image: headscale/headscale:latest
+    container_name: headscale
+    hostname: headscale
+    volumes:
+      - /mnt/user/appdata/headscale/config:/etc/headscale/
+      - /mnt/user/appdata/headscale/data:/var/lib/headscale
+    #ports:
+    #  - 27896:8080
+    command: headscale serve
+    restart: always
+    networks:
+      - secure
+
+networks:
+  secure:
+    external: true
