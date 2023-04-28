@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    hostname: cloudflared
+    restart: always
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=$TUNNEL_TOKEN
+    networks:
+      - secure
+
+networks:
+  secure:
+    external: true
