@@ -33,6 +33,12 @@ services:
       - "traefik.http.routers.pihole.middlewares=pihole-add-prefix"
       # Create a middleware
       - "traefik.http.middlewares.pihole-add-prefix.addprefix.prefix=/admin"
+    networks:
+      - secure
+
+networks:
+  secure:
+    external: true
 
 
 #docker run
