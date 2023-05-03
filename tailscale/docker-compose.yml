@@ -12,7 +12,7 @@ services:
     cap_add: # Required for tailscale to work 
       - net_admin 
       - sys_module 
-    command: tailscaled --login-server https://vpn.mindful-student.net
+    command: tailscale up --login-server https://vpn.mindful-student.net
     privileged: true 
     networks:
       - secure
