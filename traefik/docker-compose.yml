@@ -11,7 +11,7 @@ services:
       - "--providers.file.watch=true"
       # allows accessing a Traefik dashboard - that simplifies debugging
       # but should be disabled outside of development environments due to security reasons.
-      - "--api.insecure=true"
+      #- "--api.insecure=true"
       # enables the Docker configuration discovery
       - "--providers.docker=true"
       # do not expose Docker services by default
@@ -33,11 +33,15 @@ services:
       - "8086:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /mnt/user/appdata/traefik/config:/opt/docker/traefik
-      - /mnt/user/appdata/traefik/letsencrypt:/letsencrypt
+      - traefik-config:/opt/docker/traefik
+      - traefik-letsencrypt:/letsencrypt
     restart: always
     networks:
       - secure
+      
+volumes:
+  traefik-letsencrypt:
+  traefik-config:
 
 networks:
   secure:
