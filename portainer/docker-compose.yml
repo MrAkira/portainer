@@ -11,7 +11,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /mnt/user/appdata/portainer-ce:/data
+      - data:/data
     ports:
       - 9000:9000
     labels:
@@ -22,6 +22,9 @@ services:
       - "traefik.http.services.portainer.loadbalancer.server.port=9000"
     networks:
       - secure
+
+volumes:
+  data:
 
 networks:
   secure:
