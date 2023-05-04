@@ -13,7 +13,7 @@ services:
       - typesense
     restart: always
     env_file:
-      - stack.env
+      - ../stack.env
 
   immich-microservices:
     container_name: immich_microservices
@@ -27,7 +27,7 @@ services:
       - typesense
     restart: always
     env_file:
-      - stack.env
+      - ../stack.env
 
   immich-machine-learning:
     container_name: immich_machine_learning
@@ -37,7 +37,7 @@ services:
       - model-cache:/cache
     restart: always
     env_file:
-      - stack.env
+      - ../stack.env
 
   immich-web:
     container_name: immich_web
@@ -74,7 +74,7 @@ services:
       - pgdata:/var/lib/postgresql/data
     restart: always
     env_file:
-      - stack.env
+      - ../stack.env
 
   immich-proxy:
     container_name: immich_proxy
