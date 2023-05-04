@@ -14,6 +14,8 @@ services:
     restart: always
     env_file:
       - ../stack.env
+    networks:
+      - immich
 
   immich-microservices:
     container_name: immich_microservices
@@ -28,6 +30,8 @@ services:
     restart: always
     env_file:
       - ../stack.env
+    networks:
+      - immich
 
   immich-machine-learning:
     container_name: immich_machine_learning
@@ -38,12 +42,16 @@ services:
     restart: always
     env_file:
       - ../stack.env
+    networks:
+      - immich
 
   immich-web:
     container_name: immich_web
     image: ghcr.io/immich-app/immich-web:release
     entrypoint: ["/bin/sh", "./entrypoint.sh"]
     restart: always
+    networks:
+      - immich
 
   typesense:
     container_name: immich_typesense
@@ -56,11 +64,15 @@ services:
     volumes:
       - tsdata:/data
     restart: always
+    networks:
+      - immich
 
   redis:
     container_name: immich_redis
     image: redis:6.2
     restart: always
+    networks:
+      - immich
 
   database:
     container_name: immich_postgres
@@ -75,6 +87,8 @@ services:
     restart: always
     env_file:
       - ../stack.env
+    networks:
+      - immich
 
   immich-proxy:
     container_name: immich_proxy
@@ -90,6 +104,9 @@ services:
     depends_on:
       - immich-server
     restart: always
+    networks:
+      - secure
+      - immich
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.immich-proxy.rule=Host(`photos.mindful-student.net`)"
@@ -101,3 +118,8 @@ volumes:
   pgdata:
   model-cache:
   tsdata:
+  
+networks:
+  immich:
+  secure:
+    external: true
