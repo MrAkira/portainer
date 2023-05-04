@@ -90,6 +90,12 @@ services:
     depends_on:
       - immich-server
     restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.immich-proxy.rule=Host(`photos.mindful-student.net`)"
+      - "traefik.http.routers.immich-proxy.entrypoints=websecure"
+      - "traefik.http.routers.immich-proxy.tls.certresolver=le"
+      - "traefik.http.services.immich-proxy.loadbalancer.server.port=8080"
 
 volumes:
   pgdata:
