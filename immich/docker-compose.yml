@@ -113,6 +113,7 @@ services:
       - "traefik.http.routers.immich-proxy.entrypoints=websecure"
       - "traefik.http.routers.immich-proxy.tls.certresolver=le"
       - "traefik.http.services.immich-proxy.loadbalancer.server.port=8080"
+      - "traefik.docker.network=secure"
 
 volumes:
   pgdata:
