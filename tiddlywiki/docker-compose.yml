@@ -9,10 +9,19 @@ services:
     #ports:
     #  - 3166:3166
     volumes:
-      - /opt/tiddlywiki:/tiddlywiki
+      - data:/tiddlywiki
     networks:
       - secure
     command: zettelkasten --listen host=0.0.0.0 port=3166 username=marius password="$PW"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.tiddlywiki.rule=Host(`wiki.mindful-student.net`)"
+      - "traefik.http.routers.tiddlywiki.entrypoints=websecure"
+      - "traefik.http.routers.tiddlywiki.tls.certresolver=le"
+      - "traefik.http.services.tiddlywiki.loadbalancer.server.port=3166"
+
+volumes:
+  data:
 
 networks:
   secure:
