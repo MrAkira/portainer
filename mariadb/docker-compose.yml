@@ -3,8 +3,8 @@ version: '3'
 services:
   db:
     image: mariadb:latest
-    container_name: mariadb
-    hostname: mariadb
+    container_name: db
+    hostname: db
     security_opt: # see https://github.com/MariaDB/mariadb-docker/issues/434#issuecomment-1136151239
       - seccomp:unconfined
       - apparmor:unconfined
