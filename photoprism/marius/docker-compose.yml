@@ -22,8 +22,8 @@ services:
       - "traefik.http.services.photoprism.loadbalancer.server.port=2342"
     environment:
       PHOTOPRISM_INIT: "https"
-      PHOTOPRISM_UID: "65534"                              # user id, should match your host user id
-      PHOTOPRISM_GID: "65534"                              # group id
+      PHOTOPRISM_UID: "1000"                              # user id, should match your host user id
+      PHOTOPRISM_GID: "119"                               # group id
       PHOTOPRISM_UMASK: "0777"
       PHOTOPRISM_ADMIN_USER: "admin"                       # admin login username
       PHOTOPRISM_ADMIN_PASSWORD: "photoprism"              # initial admin password (8-72 characters)
