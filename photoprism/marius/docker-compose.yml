@@ -38,8 +38,8 @@ services:
       PHOTOPRISM_HTTP_COMPRESSION: "gzip"                  # improves transfer speed and bandwidth utilization (none or gzip)
       PHOTOPRISM_DATABASE_DRIVER: "mysql"
       PHOTOPRISM_DATABASE_SERVER: "db:4001"
-      PHOTOPRISM_DATABASE_NAME: "photoprism"
-      PHOTOPRISM_DATABASE_USER: "photoprism"
+      PHOTOPRISM_DATABASE_NAME: "photoprism-marius"
+      PHOTOPRISM_DATABASE_USER: "photoprism-marius"
       PHOTOPRISM_DATABASE_PASSWORD: "$DATABASE_PASSWORD"
       PHOTOPRISM_DISABLE_CHOWN: "false"       # disables updating storage permissions via chmod and chown on startup
       PHOTOPRISM_DISABLE_BACKUPS: "false"     # disables backing up albums and photo metadata to YAML files
