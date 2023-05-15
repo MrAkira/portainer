@@ -17,8 +17,8 @@ services:
       - WEBPASSWORD=$WEBPASSWORD
     # Volumes store your data between container upgrades
     volumes:
-      - '/mnt/user/appdata/pihole/data:/etc/pihole'
-      - '/mnt/user/appdata/dnsmasq.d:/etc/dnsmasq.d'
+      - 'pihole:/etc/pihole'
+      - 'dnsmasq:/etc/dnsmasq.d'
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
     cap_add:
       - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
@@ -35,6 +35,10 @@ services:
       - "traefik.http.middlewares.pihole-add-prefix.addprefix.prefix=/admin"
     networks:
       - secure
+
+volumes:
+  pihole:
+  dnsmasq:
 
 networks:
   secure:
