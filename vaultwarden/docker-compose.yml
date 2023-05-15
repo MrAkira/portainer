@@ -10,7 +10,7 @@ services:
       - WEBSOCKET_ENABLED=true  # Enable WebSocket notifications.
       - ADMIN_TOKEN=$ADMIN_TOKEN
     volumes:
-      - /mnt/user/appdata/vaultwarden:/data
+      - data:/data
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.vaultwarden.rule=Host(`gringotts.mindful-student.net`)"
@@ -19,7 +19,10 @@ services:
       - "traefik.http.services.vaultwarden.loadbalancer.server.port=80"
     networks:
       - secure
-      
+
+volumes:
+  data:
+
 networks:
   secure:
     external: true
