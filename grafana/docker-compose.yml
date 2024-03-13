@@ -6,6 +6,11 @@ services:
     container_name: grafana
     hostname: grafana
     restart: unless-stopped
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    environment:
+     - GF_SERVER_ROOT_URL=https://grafana.mindful-student.net/
+#     - GF_INSTALL_PLUGINS=grafana-clock-panel
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.grafana.rule=Host(`grafana.mindful-student.net`)"
@@ -18,3 +23,6 @@ services:
 networks:
   secure:
     external: true
+
+volumes:
+  grafana-storage:
