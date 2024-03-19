@@ -10,6 +10,8 @@ services:
         - data:/data
     environment:
         - ALLOWED_HOSTS=*                   # restrict this to only accept incoming traffic via specific domain name
+        - ADMIN_USERNAME=admin
+        - ADMIN_PASSWORD=admin
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.archivebox.rule=Host(`archivebox.mindful-student.net`)"
