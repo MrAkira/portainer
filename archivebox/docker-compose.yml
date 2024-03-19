@@ -12,7 +12,7 @@ services:
         - ALLOWED_HOSTS=*                   # restrict this to only accept incoming traffic via specific domain name
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.archivebox.rule=Host(`gringotts.mindful-student.net`)"
+      - "traefik.http.routers.archivebox.rule=Host(`archivebox.mindful-student.net`)"
       - "traefik.http.routers.archivebox.entrypoints=websecure"
       - "traefik.http.routers.archivebox.tls.certresolver=le"
       - "traefik.http.services.archivebox.loadbalancer.server.port=8000"
