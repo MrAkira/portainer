@@ -18,7 +18,7 @@ sudo apt-get update
 ```
 Now you can install Docker:
 ```
-sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
 ## [Install Docker on Debian](https://docs.docker.com/engine/install/debian/#install-using-the-repository)
