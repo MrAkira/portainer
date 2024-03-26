@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:latest
+    container_name: uptime-kuma
+    volumes:
+      - data:/app/data
+    ports:
+      - 3001:3001  # <Host Port>:<Container Port>
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.vaultwarden.rule=Host(`gringotts.mindful-student.net`)"
+      - "traefik.http.routers.vaultwarden.entrypoints=websecure"
+      - "traefik.http.routers.vaultwarden.tls.certresolver=le"
+      - "traefik.http.services.vaultwarden.loadbalancer.server.port=80"
+    networks:
+      - secure
+
+volumes:
+  data:
+
+networks:
+  secure:
+    external: true
