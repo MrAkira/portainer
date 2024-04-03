@@ -1,16 +1,25 @@
 version: '3'
 
 services:
-    changedetection:
-      image: ghcr.io/dgtlmoon/changedetection.io:latest
-      container_name: changedetection
-      hostname: changedetection
-      volumes:
-        - /opt/changedetection:/datastore
-      networks:
-        - secure
-      restart: unless-stopped
-      
+  changedetection:
+    image: ghcr.io/dgtlmoon/changedetection.io:latest
+    container_name: changedetection
+    hostname: changedetection
+    volumes:
+      - data:/datastore
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.changedetection.rule=Host(`changedetection.mindful-student.net`)"
+      - "traefik.http.routers.changedetection.entrypoints=websecure"
+      - "traefik.http.routers.changedetection.tls.certresolver=le"
+      - "traefik.http.services.changedetection.loadbalancer.server.port=5000"
+    networks:
+      - secure
+    restart: always
+
+volumes:
+  data:
+
 networks:
   secure:
     external: true
