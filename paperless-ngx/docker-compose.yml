@@ -56,6 +56,7 @@ services:
       - "traefik.http.routers.paperless-ngx.entrypoints=websecure"
       - "traefik.http.routers.paperless-ngx.tls.certresolver=le"
       - "traefik.http.services.paperless-ngx.loadbalancer.server.port=8000"
+      - "traefik.docker.network=secure"
     networks:
       - secure
       - paperless
