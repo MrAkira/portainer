@@ -26,12 +26,6 @@
 version: "3"
 
 services:
-  broker:
-    image: docker.io/library/redis:7
-    restart: unless-stopped
-    volumes:
-      - redisdata:/data
-
   webserver:
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
     restart: unless-stopped
@@ -64,6 +58,7 @@ services:
       - "traefik.http.services.paperless-ngx.loadbalancer.server.port=8000"
     networks:
       - secure
+      - paperless
 
   gotenberg:
     image: docker.io/gotenberg/gotenberg:7.10
@@ -74,12 +69,25 @@ services:
       - "gotenberg"
       - "--chromium-disable-javascript=true"
       - "--chromium-allow-list=file:///tmp/.*"
+    networks:
+      - paperless
 
   tika:
     image: ghcr.io/paperless-ngx/tika:latest
     restart: unless-stopped
+    networks:
+      - paperless
+
+  broker:
+    image: docker.io/library/redis:7
+    restart: unless-stopped
+    volumes:
+      - redisdata:/data
+    networks:
+      - paperless
 
 networks:
+  paperless:
   secure:
     external: true
 
