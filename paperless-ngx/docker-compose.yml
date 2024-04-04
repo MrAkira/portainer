@@ -37,8 +37,8 @@ services:
     restart: unless-stopped
     depends_on:
       - broker
-    ports:
-      - "8000:8000"
+      - gotenberg
+      - tika
     volumes:
       - data:/usr/src/paperless/data
       - media:/usr/src/paperless/media
@@ -52,6 +52,36 @@ services:
       - PAPERLESS_URL=https://docs.mindful-student.net
       - PAPERLESS_SECRET_KEY=$PAPERLESS_SECRET_KEY
       - APERLESS_TIME_ZONE=Europe/Berlin
+      - PAPERLESS_FILENAME_FORMAT={created_year}/{correspondent}/{title}
+      - PAPERLESS_TIKA_ENABLED=1
+      - PAPERLESS_TIKA_GOTENBERG_ENDPOINT=http://gotenberg:3000
+      - PAPERLESS_TIKA_ENDPOINT=http://tika:9998
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.paperless-ngx.rule=Host(`docs.mindful-student.net`)"
+      - "traefik.http.routers.paperless-ngx.entrypoints=websecure"
+      - "traefik.http.routers.paperless-ngx.tls.certresolver=le"
+      - "traefik.http.services.paperless-ngx.loadbalancer.server.port=8000"
+    networks:
+      - secure
+
+  gotenberg:
+    image: docker.io/gotenberg/gotenberg:7.10
+    restart: unless-stopped
+    # The gotenberg chromium route is used to convert .eml files. We do not
+    # want to allow external content like tracking pixels or even javascript.
+    command:
+      - "gotenberg"
+      - "--chromium-disable-javascript=true"
+      - "--chromium-allow-list=file:///tmp/.*"
+
+  tika:
+    image: ghcr.io/paperless-ngx/tika:latest
+    restart: unless-stopped
+
+networks:
+  secure:
+    external: true
 
 volumes:
   data:
