@@ -13,8 +13,28 @@ services:
       - "traefik.http.routers.changedetection.entrypoints=websecure"
       - "traefik.http.routers.changedetection.tls.certresolver=le"
       - "traefik.http.services.changedetection.loadbalancer.server.port=5000"
+    environment:
+      - WEBDRIVER_URL=http://browser-chrome:4444/wd/hub
     networks:
       - secure
+      - backend
+    restart: always
+
+  browser-chrome:
+    image: selenium/standalone-chrome-debug:3.141.59
+    hostname: browser-chrome
+    container_name: browser-chrome
+    environment:
+      - VNC_NO_PASSWORD=1
+      - SCREEN_WIDTH=1920
+      - SCREEN_HEIGHT=1080
+      - SCREEN_DEPTH=24
+    volumes:
+      # Workaround to avoid the browser crashing inside a docker container
+      # See https://github.com/SeleniumHQ/docker-selenium#quick-start
+      - /dev/shm:/dev/shm
+    networks:
+      - backend
     restart: always
 
 volumes:
@@ -23,6 +43,7 @@ volumes:
 networks:
   secure:
     external: true
+  backend:
 
   #    environment:
   #        Default listening port, can also be changed with the -p option
@@ -69,20 +90,6 @@ networks:
      # Used for fetching pages via WebDriver+Chrome where you need Javascript support.
      # Now working on arm64 (needs testing on rPi - tested on Oracle ARM instance)
      # replace image with seleniarm/standalone-chromium:4.0.0-20211213
-
-#    browser-chrome:
-#        hostname: browser-chrome
-#        image: selenium/standalone-chrome-debug:3.141.59
-#        environment:
-#            - VNC_NO_PASSWORD=1
-#            - SCREEN_WIDTH=1920
-#            - SCREEN_HEIGHT=1080
-#            - SCREEN_DEPTH=24
-#        volumes:
-#            # Workaround to avoid the browser crashing inside a docker container
-#            # See https://github.com/SeleniumHQ/docker-selenium#quick-start
-#            - /dev/shm:/dev/shm
-#        restart: unless-stopped
 
      # Used for fetching pages via Playwright+Chrome where you need Javascript support.
 
