@@ -13,6 +13,7 @@ services:
       - "traefik.http.routers.changedetection.entrypoints=websecure"
       - "traefik.http.routers.changedetection.tls.certresolver=le"
       - "traefik.http.services.changedetection.loadbalancer.server.port=5000"
+      - "traefik.docker.network=secure"
     environment:
       - WEBDRIVER_URL=http://browser-chrome:4444/wd/hub
     networks:
