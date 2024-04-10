@@ -22,8 +22,9 @@ services:
 
   playwright-chrome:
     hostname: playwright-chrome
+    container_name: playwright-chrome
     image: browserless/chrome:latest
-    restart: unless-stopped
+    restart: always
     environment:
       - SCREEN_WIDTH=1920
       - SCREEN_HEIGHT=1024
