@@ -16,9 +16,16 @@ services:
       - "traefik.docker.network=secure"
     environment:
       - PLAYWRIGHT_DRIVER_URL=ws://playwright-chrome:3000/?stealth=1&--disable-web-security=true
+      - BASE_URL=https://changedetection.mindful-student.net
+      - HIDE_REFERER=true
     networks:
       - secure
       - backend
+    depends_on:
+      browser-chrome:
+        condition: service_started
+      playwright-chrome:
+        condition: service_started
     restart: always
 
   playwright-chrome:
@@ -40,6 +47,21 @@ services:
     networks:
       - backend
 
+  browser-chrome:
+    hostname: browser-chrome
+    image: selenium/standalone-chrome:4
+    environment:
+      - VNC_NO_PASSWORD=1
+      - SCREEN_WIDTH=1920
+      - SCREEN_HEIGHT=1080
+      - SCREEN_DEPTH=24
+    volumes:
+      # Workaround to avoid the browser crashing inside a docker container
+      # See https://github.com/SeleniumHQ/docker-selenium#quick-start
+      - /dev/shm:/dev/shm
+    networks:
+      - backend
+    restart: always
 
 volumes:
   data:
