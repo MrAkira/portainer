@@ -1,0 +1,28 @@
+services:
+  languagetool:
+    image: erikvl87/languagetool:latest
+    container_name: languagetool
+    hostname: languagetool
+    #ports:
+    #  - 8010:8010                        # Using default port from the image
+    environment:
+      - langtool_languageModel=/ngrams   # OPTIONAL: Using ngrams data
+    #  - Java_Xms=512m                    # OPTIONAL: Setting a minimal Java heap size of 512 mib
+    #  - Java_Xmx=1g                      # OPTIONAL: Setting a maximum Java heap size of 1 Gib
+    volumes:
+      - /opt/ngrams:/ngrams     # OPTIONAL: The location of ngrams data on the local machine
+      #- /path/to/logback.xml:/LanguageTool/logback.xml:ro  # OPTIONAL: Overwrite the logging configuration
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.languagetool.rule=Host(`lang.mindful-student.net`)"
+      - "traefik.http.routers.languagetool.entrypoints=websecure"
+      - "traefik.http.routers.languagetool.tls.certresolver=le"
+      - "traefik.http.services.languagetool.loadbalancer.server.port=8010"
+    networks:
+      - secure
+
+networks:
+  secure:
+    external: true
+      
