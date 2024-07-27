@@ -4,8 +4,8 @@ services:
     container_name: gollum
     hostname: gollum
     restart: always
-    ports:
-      - "80:4567/tcp"
+    #ports:
+    #  - "80:4567/tcp"
     volumes:
       - gollum-config:/etc/gollum
       - gollum-www-data:/home/www-data
@@ -17,7 +17,7 @@ services:
       - "traefik.http.routers.gollum.rule=Host(`gollum.mindful-student.net`)"
       - "traefik.http.routers.gollum.entrypoints=websecure"
       - "traefik.http.routers.gollum.tls.certresolver=le"
-      - "traefik.http.services.gollum.loadbalancer.server.port=80"
+      - "traefik.http.services.gollum.loadbalancer.server.port=4567"
     networks:
       - secure
 
