@@ -5,13 +5,13 @@ services:
     ports:
       - "80:4567/tcp"
     volumes:
-      - gollum-config:/etc/gollum/config.rb
-      - gollum-gitconfig:/home/www-data/.gitconfig
+      - gollum-config:/etc/gollum
+      - gollum-www-data:/home/www-data
       - gollum-wikidata:/wiki
     command:
       - "--config=/etc/gollum/config.rb"
 
 volumes:
   gollum-config:
-  gollum-gitconfig:
+  gollum-www-data:
   gollum-wikidata:
