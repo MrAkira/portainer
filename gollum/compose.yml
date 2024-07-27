@@ -13,5 +13,5 @@ services:
 
 volumes:
   gollum-config:
-  gollum-gitignore:
+  gollum-gitconfig:
   gollum-wikidata:
