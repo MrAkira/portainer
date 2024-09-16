@@ -12,11 +12,11 @@ services:
       - --config.file=/etc/prometheus/prometheus.yml
       - --web.config.file=/etc/prometheus/web.yml
     networks:
-      - localprom
+      - secure
 
 networks:
-  localprom:
-    driver: bridge
+  secure:
+    external: true
 
 volumes:
   data:
