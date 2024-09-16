@@ -11,6 +11,12 @@ services:
     command:
       - --config.file=/etc/prometheus/prometheus.yml
       - --web.config.file=/etc/prometheus/web.yml
+    networks:
+      - localprom
+
+networks:
+  localprom:
+    driver: bridge
 
 volumes:
   data:
