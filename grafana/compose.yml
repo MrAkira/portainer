@@ -5,8 +5,12 @@ services:
     hostname: grafana
     container_name: grafana
     restart: always
-    user: '1000:1000'
+    #user: '1000:1000'
     ports:
       - '3000:3000'
     volumes:
-      - /opt/volumes/grafana:/var/lib/grafana
+      - data:/var/lib/grafana
+      #- /opt/volumes/grafana:/var/lib/grafana
+
+volumes:
+  data:
