@@ -5,11 +5,12 @@ services:
     hostname: prometheus
     container_name: prometheus
     volumes:
-      - "/opt/volumes/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"
-    networks:
-      - localprom
+      - data:/etc/prometheus/
     ports:
       - 9090:9090
-networks:
-  localprom:
-    driver: bridge
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --web.config.file=/etc/prometheus/web.yml
+
+volumes:
+  data:
