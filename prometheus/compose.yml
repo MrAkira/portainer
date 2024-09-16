@@ -1,0 +1,15 @@
+---
+services:
+  prometheus:
+    image: prom/prometheus
+    hostname: prometheus
+    container_name: prometheus
+    volumes:
+      - "/opt/volumes/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"
+    networks:
+      - localprom
+    ports:
+      - 9090:9090
+networks:
+  localprom:
+    driver: bridge
