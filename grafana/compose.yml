@@ -11,6 +11,12 @@ services:
     volumes:
       - data:/var/lib/grafana
       #- /opt/volumes/grafana:/var/lib/grafana
+    networks:
+      - secure
+
+networks:
+  secure:
+    external: true
 
 volumes:
   data:
