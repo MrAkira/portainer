@@ -15,6 +15,12 @@ services:
       "--stability.level=public-preview",
       "/etc/alloy/config.alloy",
     ]
+    networks:
+      - secure
+
+networks:
+  secure:
+    external: true
 
 volumes:
   data:
