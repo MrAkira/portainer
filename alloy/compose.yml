@@ -12,7 +12,7 @@ services:
     command: [
       "run",
       "--server.http.listen-addr=0.0.0.0:12345",
-      "--stability.level=public-preview",
+      "--stability.level=experimental",
       "/etc/alloy/config.alloy",
     ]
     networks:
